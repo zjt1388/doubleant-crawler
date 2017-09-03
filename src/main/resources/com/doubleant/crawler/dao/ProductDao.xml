@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.doubleant.crawler.dao.ProductDao" >
+    <resultMap id="BaseResultMap" type="com.doubleant.crawler.po.ProductPO" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="product_name" property="productName" jdbcType="VARCHAR" />
+        <result column="product_url" property="productUrl" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id,
+        product_name,
+        product_url,
+        create_time,
+        update_time
+    </sql>
+
+    <insert id="add" parameterType="com.doubleant.crawler.po.WacaiArticlePO" >
+        insert into
+        t_product (id,
+        product_name,
+        product_url,
+        create_time,
+        update_time)
+        values (
+        null,
+        #{productName},
+        #{productUrl},
+        now(),
+        now())
+    </insert>
+
+</mapper>
