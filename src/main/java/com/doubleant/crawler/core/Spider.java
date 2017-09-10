@@ -13,6 +13,7 @@ import com.doubleant.crawler.model.Page;
 import com.doubleant.crawler.model.RegexRule;
 import com.doubleant.crawler.model.UrlSeed;
 import com.doubleant.crawler.utils.TimeSleep;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -198,7 +199,9 @@ public class Spider {
             for (Iterator<UrlSeed> it = urlSeedList.iterator(); it.hasNext(); ) {
                 UrlSeed seed = it.next();
                 if (!regexRule.regex(seed.getUrl())) {
-                    System.out.println(seed.getUrl());
+                    if(StringUtils.isNotBlank(seed.getUrl())) {
+                        System.out.println("urlSeedList remove :" + seed.getUrl());
+                    }
                     it.remove();
                 }
             }
