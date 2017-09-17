@@ -5,7 +5,7 @@ import com.doubleant.crawler.core.downloader.Downloader;
 import com.doubleant.crawler.core.downloader.PreDefine.HttpClientPoolDownloader;
 import com.doubleant.crawler.core.pageprocesser.PageProcessor;
 import com.doubleant.crawler.core.pageprocesser.PreDefine.TextPageProcessor;
-import com.doubleant.crawler.core.saver.PreDefine.ConsoleSaver;
+import com.doubleant.crawler.core.saver.impl.ConsoleSaver;
 import com.doubleant.crawler.core.saver.Saver;
 import com.doubleant.crawler.core.scheduler.PreDefine.QueueScheduler;
 import com.doubleant.crawler.core.scheduler.Scheduler;
@@ -16,7 +16,6 @@ import com.doubleant.crawler.utils.TimeSleep;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 import java.util.Iterator;
 import java.util.List;

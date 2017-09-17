@@ -1,4 +1,4 @@
-package com.doubleant.crawler.core.saver.PreDefine;
+package com.doubleant.crawler.core.saver.impl;
 
 import com.doubleant.crawler.core.saver.Saver;
 import com.doubleant.crawler.dao.ProductDao;
