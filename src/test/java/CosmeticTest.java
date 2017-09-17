@@ -1,6 +1,8 @@
 import com.doubleant.crawler.core.Spider;
 import com.doubleant.crawler.core.saver.Saver;
+import com.doubleant.crawler.dao.ProductClassifyDao;
 import com.doubleant.crawler.dao.ProductDao;
+import com.doubleant.crawler.po.ProductClassifyPO;
 import com.doubleant.crawler.po.ProductPO;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,10 @@ public class CosmeticTest extends BaseTest{
     private Saver officialWebsiteSaver;
     @Autowired
     private ProductDao productDao;
+    @Autowired
+    private ProductClassifyDao productClassifyDao;
+    @Autowired
+    private Saver cosmeticDetailSaver;
 
     @Test
     public void productTest(){
@@ -45,6 +51,28 @@ public class CosmeticTest extends BaseTest{
                     .thread(1)
                     .setSaver(officialWebsiteSaver)
                     .run();
+        }
+    }
+
+    /**
+     * 产品详情抓取
+     */
+    @Test
+    public void productDetailTest(){
+        List<ProductPO> productPOS = productDao.getAllProducts();
+        List<ProductClassifyPO> classifyPOS = productClassifyDao.getAllClassify();
+        for(ProductPO productPO : productPOS) {
+            for(ProductClassifyPO classifyPO : classifyPOS) {
+                String url = productPO.getProductUrl() + "&type=" + classifyPO.getTypeUrl();
+                System.out.println("抓取的url为：" + url);
+                //抓取化妆品产品信息
+                Spider.build()
+                        .addUrlSeed(url)
+                        .addRegexRule("+http://www.cosmetic-ingredients.net/.*")
+                        .thread(1)
+                        .setSaver(cosmeticDetailSaver)
+                        .run();
+            }
         }
     }
 }
